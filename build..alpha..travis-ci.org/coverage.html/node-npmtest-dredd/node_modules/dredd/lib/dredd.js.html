@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-dredd/node_modules/dredd/lib/dredd.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-dredd">npmtest-dredd (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-dredd/node_modules/dredd/lib/dredd.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">16.02% <small>(33 / 206)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">1.18% <small>(1 / 85)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">2.38% <small>(1 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">16.42% <small>(33 / 201)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-dredd/node_modules/dredd/lib/</a> &#187; dredd.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Generated by CoffeeScript 1.12.5
+var Dredd, FILE_DOWNLOAD_TIMEOUT, PROXY_ENV_VARIABLES, Runner, applyConfiguration, async, clone, configureReporters, dreddTransactions, fs, glob, handleRuntimeProblems, logger, options, removeDuplicates, request, url,
+  hasProp = {}.hasOwnProperty,
+  indexOf = [].indexOf || <span class="fstat-no" title="function not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >function(item) {</span> <span class="cstat-no" title="statement not covered" >for (var i = 0, l = this.length; i &lt; l; i++) { <span class="cstat-no" title="statement not covered" >if (i in this &amp;&amp; this[i] === item) <span class="cstat-no" title="statement not covered" >return i; </span></span>} <span class="cstat-no" title="statement not covered" ></span>return -1; </span>};</span>
+&nbsp;
+glob = require('glob');
+&nbsp;
+fs = require('fs');
+&nbsp;
+clone = require('clone');
+&nbsp;
+async = require('async');
+&nbsp;
+request = require('request');
+&nbsp;
+url = require('url');
+&nbsp;
+logger = require('./logger');
+&nbsp;
+options = require('./options');
+&nbsp;
+Runner = require('./transaction-runner');
+&nbsp;
+applyConfiguration = require('./configuration').applyConfiguration;
+&nbsp;
+handleRuntimeProblems = require('./handle-runtime-problems');
+&nbsp;
+dreddTransactions = require('dredd-transactions');
+&nbsp;
+configureReporters = require('./configure-reporters');
+&nbsp;
+PROXY_ENV_VARIABLES = ['HTTP_PROXY', 'HTTPS_PROXY', 'NO_PROXY'];
+&nbsp;
+FILE_DOWNLOAD_TIMEOUT = 5000;
+&nbsp;
+removeDuplicates = <span class="fstat-no" title="function not covered" >function(arr) {</span>
+<span class="cstat-no" title="statement not covered" >  return arr.reduce(<span class="fstat-no" title="function not covered" >function(alreadyProcessed, currentItem) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (alreadyProcessed.indexOf(currentItem) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >      return alreadyProcessed.concat(currentItem);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return alreadyProcessed;</span>
+  }, []);
+};
+&nbsp;
+Dredd = (function() {
+<span class="fstat-no" title="function not covered" >  function Dredd(config) {</span>
+<span class="cstat-no" title="statement not covered" >    this.init(config);</span>
+  }
+&nbsp;
+  Dredd.prototype.init = <span class="fstat-no" title="function not covered" >function(config) {</span>
+<span class="cstat-no" title="statement not covered" >    this.configuration = applyConfiguration(config);</span>
+<span class="cstat-no" title="statement not covered" >    this.configuration.http = {};</span>
+<span class="cstat-no" title="statement not covered" >    this.tests = [];</span>
+<span class="cstat-no" title="statement not covered" >    this.stats = {</span>
+      tests: 0,
+      failures: 0,
+      errors: 0,
+      passes: 0,
+      skipped: 0,
+      start: 0,
+      end: 0,
+      duration: 0
+    };
+<span class="cstat-no" title="statement not covered" >    this.transactions = [];</span>
+<span class="cstat-no" title="statement not covered" >    this.runner = new Runner(this.configuration);</span>
+<span class="cstat-no" title="statement not covered" >    configureReporters(this.configuration, this.stats, this.tests, this.runner);</span>
+<span class="cstat-no" title="statement not covered" >    return this.logProxySettings();</span>
+  };
+&nbsp;
+  Dredd.prototype.logProxySettings = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    var envVariableName, envVariableValue, message, proxySettings, ref, ref1;</span>
+<span class="cstat-no" title="statement not covered" >    proxySettings = [];</span>
+<span class="cstat-no" title="statement not covered" >    ref = process.env;</span>
+<span class="cstat-no" title="statement not covered" >    for (envVariableName in ref) {</span>
+<span class="cstat-no" title="statement not covered" >      if (!hasProp.call(ref, envVariableName)) <span class="cstat-no" title="statement not covered" >continue;</span></span>
+<span class="cstat-no" title="statement not covered" >      envVariableValue = ref[envVariableName];</span>
+<span class="cstat-no" title="statement not covered" >      if (ref1 = envVariableName.toUpperCase(), indexOf.call(PROXY_ENV_VARIABLES, ref1) &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        continue;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (envVariableValue === '') {</span>
+<span class="cstat-no" title="statement not covered" >        continue;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      proxySettings.push(envVariableName + "=" + envVariableValue);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (proxySettings.length) {</span>
+<span class="cstat-no" title="statement not covered" >      message = "HTTP(S) proxy specified by environment variables: " + (proxySettings.join(', ')) + ". Please read documentation on how Dredd works with proxies: https://dredd.readthedocs.io/en/latest/how-it-works/#using-https-proxy";</span>
+<span class="cstat-no" title="statement not covered" >      return logger.verbose(message);</span>
+    }
+  };
+&nbsp;
+  Dredd.prototype.run = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var base, base1, key, passedConfigData, ref, val;</span>
+<span class="cstat-no" title="statement not covered" >    this.configDataIsEmpty = true;</span>
+<span class="cstat-no" title="statement not covered" >    if ((base = this.configuration).files == null) {</span>
+<span class="cstat-no" title="statement not covered" >      base.files = [];</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if ((base1 = this.configuration).data == null) {</span>
+<span class="cstat-no" title="statement not covered" >      base1.data = {};</span>
+    }
+<span class="cstat-no" title="statement not covered" >    passedConfigData = {};</span>
+<span class="cstat-no" title="statement not covered" >    ref = this.configuration.data || {};</span>
+<span class="cstat-no" title="statement not covered" >    for (key in ref) {</span>
+<span class="cstat-no" title="statement not covered" >      if (!hasProp.call(ref, key)) <span class="cstat-no" title="statement not covered" >continue;</span></span>
+<span class="cstat-no" title="statement not covered" >      val = ref[key];</span>
+<span class="cstat-no" title="statement not covered" >      this.configDataIsEmpty = false;</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof val === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        passedConfigData[key] = {</span>
+          filename: key,
+          raw: val
+        };
+      } else <span class="cstat-no" title="statement not covered" >if ((typeof val === 'object') &amp;&amp; val.raw &amp;&amp; val.filename) {</span>
+<span class="cstat-no" title="statement not covered" >        passedConfigData[val.filename] = {</span>
+          filename: val.filename,
+          raw: val.raw
+        };
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    if (!this.configDataIsEmpty) {</span>
+<span class="cstat-no" title="statement not covered" >      this.configuration.data = passedConfigData;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    this.configuration.options.path = removeDuplicates(this.configuration.options.path);</span>
+<span class="cstat-no" title="statement not covered" >    logger.verbose('Expanding glob patterns.');</span>
+<span class="cstat-no" title="statement not covered" >    return this.expandGlobs((<span class="fstat-no" title="function not covered" >function(_this) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(globsErr) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (globsErr) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(globsErr, _this.stats);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        logger.verbose('Reading API description files.');</span>
+<span class="cstat-no" title="statement not covered" >        return _this.loadFiles(<span class="fstat-no" title="function not covered" >function(loadErr) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (loadErr) {</span>
+<span class="cstat-no" title="statement not covered" >            return callback(loadErr, _this.stats);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          logger.verbose('Parsing API description files and compiling a list of HTTP transactions to test.');</span>
+<span class="cstat-no" title="statement not covered" >          return _this.compileTransactions(<span class="fstat-no" title="function not covered" >function(compileErr) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (compileErr) {</span>
+<span class="cstat-no" title="statement not covered" >              return callback(compileErr, _this.stats);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            logger.verbose('Starting reporters and waiting until all of them are ready.');</span>
+<span class="cstat-no" title="statement not covered" >            return _this.emitStart(<span class="fstat-no" title="function not covered" >function(emitStartErr) {</span></span>
+<span class="cstat-no" title="statement not covered" >              if (emitStartErr) {</span>
+<span class="cstat-no" title="statement not covered" >                return callback(emitStartErr, _this.stats);</span>
+              }
+<span class="cstat-no" title="statement not covered" >              logger.verbose('Starting transaction runner.');</span>
+<span class="cstat-no" title="statement not covered" >              return _this.startRunner(<span class="fstat-no" title="function not covered" >function(runnerErr) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (runnerErr) {</span>
+<span class="cstat-no" title="statement not covered" >                  return callback(runnerErr, _this.stats);</span>
+                }
+<span class="cstat-no" title="statement not covered" >                logger.verbose('Wrapping up testing.');</span>
+<span class="cstat-no" title="statement not covered" >                return _this.transactionsComplete(callback);</span>
+              });
+            });
+          });
+        });
+      };
+    })(this));
+  };
+&nbsp;
+  Dredd.prototype.expandGlobs = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    return async.each(this.configuration.options.path, (<span class="fstat-no" title="function not covered" >function(_this) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(globToExpand, globCallback) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (/^http(s)?:\/\//.test(globToExpand)) {</span>
+<span class="cstat-no" title="statement not covered" >          _this.configuration.files = _this.configuration.files.concat(globToExpand);</span>
+<span class="cstat-no" title="statement not covered" >          return globCallback();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return glob(globToExpand, <span class="fstat-no" title="function not covered" >function(err, match) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            return globCallback(err);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          _this.configuration.files = _this.configuration.files.concat(match);</span>
+<span class="cstat-no" title="statement not covered" >          return globCallback();</span>
+        });
+      };
+    })(this), (<span class="fstat-no" title="function not covered" >function(_this) {</span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(err) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(err, _this.stats);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (_this.configDataIsEmpty &amp;&amp; _this.configuration.files.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >          err = new Error("API description document (or documents) not found on path: '" + _this.configuration.options.path + "'");</span>
+<span class="cstat-no" title="statement not covered" >          return callback(err, _this.stats);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        _this.configuration.files = removeDuplicates(_this.configuration.files);</span>
+<span class="cstat-no" title="statement not covered" >        return callback(null, _this.stats);</span>
+      };
+    })(this));
+  };
+&nbsp;
+  Dredd.prototype.loadFiles = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    return async.eachLimit(this.configuration.files, 6, (<span class="fstat-no" title="function not covered" >function(_this) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(fileUrlOrPath, loadCallback) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var host, protocol, ref;</span>
+<span class="cstat-no" title="statement not covered" >        ref = url.parse(fileUrlOrPath), protocol = ref.protocol, host = ref.host;</span>
+<span class="cstat-no" title="statement not covered" >        if (host &amp;&amp; (protocol === 'http:' || protocol === 'https:')) {</span>
+<span class="cstat-no" title="statement not covered" >          logger.verbose('Downloading remote file:', fileUrlOrPath);</span>
+<span class="cstat-no" title="statement not covered" >          return _this.downloadFile(fileUrlOrPath, loadCallback);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          return _this.readLocalFile(fileUrlOrPath, loadCallback);</span>
+        }
+      };
+    })(this), callback);
+  };
+&nbsp;
+  Dredd.prototype.downloadFile = <span class="fstat-no" title="function not covered" >function(fileUrl, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    options = clone(this.configuration.http);</span>
+<span class="cstat-no" title="statement not covered" >    options.url = fileUrl;</span>
+<span class="cstat-no" title="statement not covered" >    options.timeout = FILE_DOWNLOAD_TIMEOUT;</span>
+<span class="cstat-no" title="statement not covered" >    return request.get(options, (<span class="fstat-no" title="function not covered" >function(_this) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(downloadError, res, body) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var err;</span>
+<span class="cstat-no" title="statement not covered" >        if (downloadError) {</span>
+<span class="cstat-no" title="statement not covered" >          logger.debug("Downloading " + fileUrl + " errored:", ("" + downloadError) || downloadError.code);</span>
+<span class="cstat-no" title="statement not covered" >          err = new Error("Error when loading file from URL '" + fileUrl + "'. Is the provided URL correct?");</span>
+<span class="cstat-no" title="statement not covered" >          return callback(err, _this.stats);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (!body || res.statusCode &lt; 200 || res.statusCode &gt;= 300) {</span>
+<span class="cstat-no" title="statement not covered" >          err = new Error("Unable to load file from URL '" + fileUrl + "'. Server did not send any blueprint back and responded with status code " + res.statusCode + ".");</span>
+<span class="cstat-no" title="statement not covered" >          return callback(err, _this.stats);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        _this.configuration.data[fileUrl] = {</span>
+          raw: body,
+          filename: fileUrl
+        };
+<span class="cstat-no" title="statement not covered" >        return callback(null, _this.stats);</span>
+      };
+    })(this));
+  };
+&nbsp;
+  Dredd.prototype.readLocalFile = <span class="fstat-no" title="function not covered" >function(filePath, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    return fs.readFile(filePath, 'utf8', (<span class="fstat-no" title="function not covered" >function(_this) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(readError, data) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var err;</span>
+<span class="cstat-no" title="statement not covered" >        if (readError) {</span>
+<span class="cstat-no" title="statement not covered" >          err = new Error("Error when reading file '" + filePath + "' (" + readError.message + "). Is the provided path correct?");</span>
+<span class="cstat-no" title="statement not covered" >          return callback(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        _this.configuration.data[filePath] = {</span>
+          raw: data,
+          filename: filePath
+        };
+<span class="cstat-no" title="statement not covered" >        return callback(null, _this.stats);</span>
+      };
+    })(this));
+  };
+&nbsp;
+  Dredd.prototype.compileTransactions = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    this.transactions = [];</span>
+<span class="cstat-no" title="statement not covered" >    return async.each(Object.keys(this.configuration.data), (<span class="fstat-no" title="function not covered" >function(_this) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(filename, next) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var fileData;</span>
+<span class="cstat-no" title="statement not covered" >        fileData = _this.configuration.data[filename];</span>
+<span class="cstat-no" title="statement not covered" >        if (fileData.annotations == null) {</span>
+<span class="cstat-no" title="statement not covered" >          fileData.annotations = [];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        logger.verbose('Compiling HTTP transactions from API description file:', filename);</span>
+<span class="cstat-no" title="statement not covered" >        return dreddTransactions.compile(fileData.raw, filename, <span class="fstat-no" title="function not covered" >function(compilationError, compilationResult) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var error, i, j, len, len1, ref, ref1, warning;</span>
+<span class="cstat-no" title="statement not covered" >          if (compilationError) {</span>
+<span class="cstat-no" title="statement not covered" >            return next(compilationError);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          ref = compilationResult.errors;</span>
+<span class="cstat-no" title="statement not covered" >          for (i = 0, len = ref.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            error = ref[i];</span>
+<span class="cstat-no" title="statement not covered" >            error.type = 'error';</span>
+<span class="cstat-no" title="statement not covered" >            fileData.annotations.push(error);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          ref1 = compilationResult.warnings;</span>
+<span class="cstat-no" title="statement not covered" >          for (j = 0, len1 = ref1.length; j &lt; len1; j++) {</span>
+<span class="cstat-no" title="statement not covered" >            warning = ref1[j];</span>
+<span class="cstat-no" title="statement not covered" >            warning.type = 'warning';</span>
+<span class="cstat-no" title="statement not covered" >            fileData.annotations.push(warning);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          fileData.mediaType = compilationResult.mediaType;</span>
+<span class="cstat-no" title="statement not covered" >          _this.transactions = _this.transactions.concat(compilationResult.transactions);</span>
+<span class="cstat-no" title="statement not covered" >          return next();</span>
+        });
+      };
+    })(this), (<span class="fstat-no" title="function not covered" >function(_this) {</span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(runtimeError) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (runtimeError == null) {</span>
+<span class="cstat-no" title="statement not covered" >          runtimeError = handleRuntimeProblems(_this.configuration.data);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return callback(runtimeError, _this.stats);</span>
+      };
+    })(this));
+  };
+&nbsp;
+  Dredd.prototype.emitStart = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var reporterCount, reporterErrorOccurred;</span>
+<span class="cstat-no" title="statement not covered" >    reporterCount = this.configuration.emitter.listeners('start').length;</span>
+<span class="cstat-no" title="statement not covered" >    reporterErrorOccurred = false;</span>
+<span class="cstat-no" title="statement not covered" >    return this.configuration.emitter.emit('start', this.configuration.data, (<span class="fstat-no" title="function not covered" >function(_this) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function(reporterError) {</span></span>
+<span class="cstat-no" title="statement not covered" >        reporterCount--;</span>
+<span class="cstat-no" title="statement not covered" >        if (reporterError &amp;&amp; reporterErrorOccurred === false) {</span>
+<span class="cstat-no" title="statement not covered" >          reporterErrorOccurred = true;</span>
+<span class="cstat-no" title="statement not covered" >          return callback(reporterError, _this.stats);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (reporterCount === 0 &amp;&amp; reporterErrorOccurred === false) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(null, _this.stats);</span>
+        }
+      };
+    })(this));
+  };
+&nbsp;
+  Dredd.prototype.startRunner = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    this.runner.config(this.configuration);</span>
+<span class="cstat-no" title="statement not covered" >    return this.runner.run(this.transactions, callback);</span>
+  };
+&nbsp;
+  Dredd.prototype.transactionsComplete = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var reporterCount;</span>
+<span class="cstat-no" title="statement not covered" >    reporterCount = this.configuration.emitter.listeners('end').length;</span>
+<span class="cstat-no" title="statement not covered" >    return this.configuration.emitter.emit('end', (<span class="fstat-no" title="function not covered" >function(_this) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        reporterCount--;</span>
+<span class="cstat-no" title="statement not covered" >        if (reporterCount === 0) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(null, _this.stats);</span>
+        }
+      };
+    })(this));
+  };
+&nbsp;
+  return Dredd;
+&nbsp;
+})();
+&nbsp;
+module.exports = Dredd;
+&nbsp;
+module.exports.options = options;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 19 2017 00:49:17 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
