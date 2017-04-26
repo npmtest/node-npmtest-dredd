@@ -1,6 +1,6 @@
 # npmtest-dredd
 
-#### test coverage for  [dredd (v3.4.2)](https://github.com/apiaryio/dredd#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-dredd.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-dredd) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-dredd.svg)](https://travis-ci.org/npmtest/node-npmtest-dredd)
+#### basic test coverage for  [dredd (v3.4.3)](https://github.com/apiaryio/dredd#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-dredd.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-dredd) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-dredd.svg)](https://travis-ci.org/npmtest/node-npmtest-dredd)
 
 #### HTTP API Testing Framework
 
@@ -10,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-dredd/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-dredd/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-dredd/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-dredd/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-dredd/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-dredd/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-dredd/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-dredd/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-dredd/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-dredd/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-dredd/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-dredd/build/coverage.html/index.html)
 
@@ -98,13 +98,13 @@
     },
     "directories": {},
     "dist": {
-        "shasum": "89f6dc287c5a34bb97d3515f766fb23af4a92446",
-        "tarball": "https://registry.npmjs.org/dredd/-/dredd-3.4.2.tgz"
+        "shasum": "19bfbf2d71d841c6d199f0d1a7a2f19288f9263c",
+        "tarball": "https://registry.npmjs.org/dredd/-/dredd-3.4.3.tgz"
     },
     "engines": {
         "node": ">= 4"
     },
-    "gitHead": "459d9369264ec1b5f02748b7efcc30a4babddf0a",
+    "gitHead": "7f45e78527af7ff8676d5493bb014c5d18b7f05d",
     "homepage": "https://github.com/apiaryio/dredd#readme",
     "keywords": [
         "api",
@@ -170,7 +170,7 @@
         "test:coverage": "scripts/coverage.sh",
         "test:hooks-handlers": "coffee scripts/test-hooks-handlers.coffee"
     },
-    "version": "3.4.2"
+    "version": "3.4.3"
 }
 ```
 
